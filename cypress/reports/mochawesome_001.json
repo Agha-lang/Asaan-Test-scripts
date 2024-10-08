@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-07-03T13:48:57.588Z",
+    "end": "2024-07-03T13:52:48.795Z",
+    "duration": 231207,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "4119f678-2a22-4434-9133-7705da492edf",
+      "title": "",
+      "fullFile": "cypress\\e2e\\Asaan.cy.js",
+      "file": "cypress\\e2e\\Asaan.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8aaba2ec-eee4-4038-9853-33032dfeb2b2",
+          "title": "Rasheed (MXC)",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "test 13",
+              "fullTitle": "Rasheed (MXC) test 13",
+              "timedOut": null,
+              "duration": 230852,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://demoaccount.asaanretail.pk/login');\ncy.wait(10000);\ncy.wait(4000);\ncy.get('.form-group .input-field').click();\ncy.get('.form-group .input-field').type('mubarak.waqar1998@gmail.com');\ncy.get('.password-input .input-field').type('mubi@12345');\ncy.get('label').click();\ncy.get('#remeberme').click();\ncy.get('.login-button').click();\nCypress.on('uncaught:exception', (err, runnable) => {\n  // returning false here prevents Cypress from failing the test\n  return false;\n});\ncy.wait(5000);\ncy.url().should('contains', 'https://demoaccount.asaanretail.pk/home');\ncy.wait(1000);\nCypress.on('uncaught:exception', (err, runnable) => {\n  // returning false here prevents Cypress from failing the test\n  return false;\n});\ncy.visit('https://demoaccount.asaanretail.pk/order');\nfunction generateRandomKey(length) {\n  const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\n  let result = '';\n  for (let i = 0; i < length; i++) {\n    result += charset.charAt(Math.floor(Math.random() * charset.length));\n  }\n  return result;\n}\nconst randomKey = generateRandomKey(5);\nCypress.on('uncaught:exception', (err, runnable) => {\n  // returning false here prevents Cypress from failing the test\n  return false;\n});\ncy.visit('https://demoaccount.asaanretail.pk/order');\ncy.get('.bulkActionDiv').click();\ncy.get('.nav-buttons-bar > .btn-success').click();\ncy.wait(3000);\ncy.get('.col-sm-2:nth-child(6) > .form-control').scrollIntoView().click({\n  force: true\n});\ncy.wait(3000);\ncy.get('.col-sm-2:nth-child(6) > .form-control').scrollIntoView().type(randomKey, {\n  force: true,\n  delay: 0\n}).should('have.value', randomKey); // Assertion to verify input field is filled;\ncy.get('input[name=\"tracking_id\"]').click({\n  force: true\n});\ncy.wait(2000);\ncy.get('input[name=\"tracking_id\"]').scrollIntoView().type(randomKey, {\n  force: true\n}).should('have.value', randomKey); // Assertion to verify input field is filled;\ncy.get('#select2-customer_order_dropdown-container').click({\n  multiple: true\n});\n/* cy.get('#invoiceForm > div.row.row-order-create-modal > div:nth-child(7) > input').click({multiple: true});*/\ncy.wait(6000);\ncy.get('input[aria-label=\"Search\"]').type('Barron').should('have.value', 'Barron');\ncy.wait(6000);\nCypress.on('uncaught:exception', (err, runnable) => {\n  // returning false here prevents Cypress from failing the test\n  return false;\n});\ncy.get('li[title=\"Barron\"]', {\n  timeout: 20000\n}) // Wait for up to 20 seconds\n.should('exist').and('be.visible');\ncy.get('li[title=\"Barron\"]').click();\ncy.wait(5000);\ncy.get('#selectCustomerAddressModal > div > div > div > div:nth-child(2) > button').click({\n  force: true\n});\ncy.get('#selectCustomerAddressModal .close').click({\n  force: true\n});\ncy.get('#select2-sales_rep-container').click();\ncy.get('.select2-search.select2-search--dropdown').type('AsaanRetail');\ncy.get('#select2-sales_rep-container').click();\ncy.get('td #searchProductInput').click();\ncy.wait(1000);\ncy.get('td #searchProductInput').type('{backspace}');\ncy.wait(1000);\ncy.get('td #searchProductInput').type('{backspace}');\ncy.wait(1000);\ncy.get('td #searchProductInput').type('garlic press').should('have.value', 'garlic press');\ncy.wait(3000);\ncy.wait(3000);\ncy.get('#searchResults > ul > li:nth-child(1)').should('be.visible') // Wait until the element is visible\n.click();\ncy.wait(1000);\ncy.get('#invoiceForm > div:nth-child(7) > div > div.col-sm-4.text-right.pr-20 > div > div > button').click();\ncy.wait(1000);\ncy.get('.fas.fa-shopping-cart.mr-5').click();\ncy.wait(1000);\n/*cy.get('#widePopupModal > div > div > div.modal-header > div:nth-child(2) > button').click()*/\ncy.get('#return_modal_pill').click();\ncy.wait(2000);\ncy.get('#statusButton').click();\ncy.get('div.toast-notifications > div > div.snackbar-content > div > .toast-title').contains('Task Completed Successfully');\nCypress.on('uncaught:exception', (err, runnable) => {\n  // returning false here prevents Cypress from failing the test\n  return false;\n});\ncy.wait(3000);\ncy.get('#return_modal_pill', {\n  timeout: 20000\n}) // Increase timeout to 20 seconds\n.should('be.visible');\ncy.get('#return_modal_pill').click();\ncy.wait(3000);\ncy.get('.modal_card_body').click({\n  multiple: true\n});\ncy.wait(3000);\n/*Rasheed ( MXC ) */\ncy.wait(3000);\ncy.get('#couriers').select('Rasheed ( MXC )', {\n  force: true\n});\ncy.wait(3000);\ncy.wait(3000);\ncy.get(\"#weight\").clear({\n  force: true\n});\ncy.get(\"#weight\").type('5', {\n  force: true\n});\ncy.wait(2000);\ncy.get(\"#consignmentremarks\").type(\"Please\", {\n  force: true\n});\ncy.wait(2000);\ncy.get(\"#item_description\").type(\"Non custom\", {\n  force: true\n});\ncy.wait(3000);\ncy.get('.scrollable_div_with_height_550').click();\ncy.wait(2000);\ncy.get('#widePopupModal .modal-content > .modal-header').click();\ncy.wait(2000);\ncy.get('.btn-block:nth-child(2)').click();\ncy.get('div.toast-notifications > div > div.snackbar-content > div > .toast-title').contains('Task Completed Successfully');\ncy.wait(5000);\ncy.wait(8000);\ncy.wait(2000);\ncy.get('.fa.fa-window-close').click({\n  force: true\n});\ncy.wait(5000);\ncy.wait(8000);\ncy.wait(2000);\ncy.get('button[class=\"swal2-confirm swal2-styled swal2-default-outline\"]').click();\ncy.get('div.toast-notifications > div > div.snackbar-content > div > .toast-title').contains('Task Completed Successfully');\ncy.wait(3000);\n/*cy.get('.modal_card_body').click({multiple: true});*/\ncy.wait(2000);\ncy.get('#widePopupModal .span-cross-modal').click();\ncy.wait(8000);\n//else condition close",
+              "err": {},
+              "uuid": "82472986-372e-4b53-9b23-cbc1f6d582cd",
+              "parentUUID": "8aaba2ec-eee4-4038-9853-33032dfeb2b2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "82472986-372e-4b53-9b23-cbc1f6d582cd"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 230852,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

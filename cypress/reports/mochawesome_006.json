@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2024-10-08T10:47:40.907Z",
+    "end": "2024-10-08T10:47:42.574Z",
+    "duration": 1667,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b0f73c91-45d8-4681-b741-def889ba53ce",
+      "title": "",
+      "fullFile": "cypress\\e2e\\1-getting-started\\Internet.cy.js",
+      "file": "cypress\\e2e\\1-getting-started\\Internet.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ea135af0-279c-4b03-b353-1cbf91f028cb",
+          "title": "Search for product",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Displays toast message for non-existent product",
+              "fullTitle": "Search for product Displays toast message for non-existent product",
+              "timedOut": null,
+              "duration": 1556,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-screenshots\",\n  \"value\": [\n    [\n      \"\\\\1-getting-started\\\\Internet.cy.js\\\\Search for product -- Displays toast message for non-existent product (failed).png\"\n    ]\n  ]\n}",
+              "code": "const nonExistentProduct = 'NonExistentProduct123';\ncy.visit('/your-page-url');\n// Search for a non-existent product\ncy.get('input[type=\"search\"]').type(nonExistentProduct).type('{enter}');\n// Check if toast message appears\ncy.get('.toast').then($toast => {\n  if ($toast.text().includes('No such product exists')) {\n    // If toast message appears, assert it and do something\n    cy.wrap($toast).should('be.visible').contains('No such product exists');\n    // Additional actions for non-existent product case\n    // For example, you can log it, take a screenshot, etc.\n    cy.log('No such product exists: ' + nonExistentProduct);\n  } else {\n    // If toast message doesn't appear, assert something else\n    // For example, assert the product is displayed\n    cy.get('.product').should('be.visible');\n  }\n});",
+              "err": {
+                "message": "CypressError: `cy.visit()` failed trying to load:\n\nhttps://demoaccount.asaanretail.pk/your-page-url\n\nThe response we received from your web server was:\n\n  > 404: Not Found\n\nThis was considered a failure because the status code was not `2xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`",
+                "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttps://demoaccount.asaanretail.pk/your-page-url\n\nThe response we received from your web server was:\n\n  > 404: Not Found\n\nThis was considered a failure because the status code was not `2xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n    at <unknown> (https://demoaccount.asaanretail.pk/__cypress/runner/cypress_runner.js:131049:76)\n    at visitFailedByErr (https://demoaccount.asaanretail.pk/__cypress/runner/cypress_runner.js:130463:12)\n    at <unknown> (https://demoaccount.asaanretail.pk/__cypress/runner/cypress_runner.js:131032:13)\n    at tryCatcher (https://demoaccount.asaanretail.pk/__cypress/runner/cypress_runner.js:1807:23)\n    at Promise._settlePromiseFromHandler (https://demoaccount.asaanretail.pk/__cypress/runner/cypress_runner.js:1519:31)\n    at Promise._settlePromise (https://demoaccount.asaanretail.pk/__cypress/runner/cypress_runner.js:1576:18)\n    at Promise._settlePromise0 (https://demoaccount.asaanretail.pk/__cypress/runner/cypress_runner.js:1621:10)\n    at Promise._settlePromises (https://demoaccount.asaanretail.pk/__cypress/runner/cypress_runner.js:1697:18)\n    at _drainQueueStep (https://demoaccount.asaanretail.pk/__cypress/runner/cypress_runner.js:2407:12)\n    at _drainQueue (https://demoaccount.asaanretail.pk/__cypress/runner/cypress_runner.js:2400:9)\n    at Async._drainQueues (https://demoaccount.asaanretail.pk/__cypress/runner/cypress_runner.js:2416:5)\n    at Async.drainQueues (https://demoaccount.asaanretail.pk/__cypress/runner/cypress_runner.js:2286:14)\nFrom Your Spec Code:\n    at Context.eval (webpack:///./cypress/e2e/1-getting-started/Internet.cy.js:43:7)",
+                "diff": null
+              },
+              "uuid": "7a6ee588-975b-4545-b613-523181ec05e2",
+              "parentUUID": "ea135af0-279c-4b03-b353-1cbf91f028cb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "7a6ee588-975b-4545-b613-523181ec05e2"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 1556,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
