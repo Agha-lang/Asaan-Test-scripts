@@ -28,6 +28,8 @@
 ///   <reference types="cypress" />
 
 ///   <reference types="Cypress-xpath" />
+import 'cypress-file-upload';
+
 import 'cypress-plugin-tab';
 
 import './commands';
@@ -103,4 +105,3 @@ function waitForInputValue(selector, expectedValue, timeout = 10000, interval = 
   }
   
   
-
