@@ -65,10 +65,17 @@ import * as XLSX from 'xlsx';
 
 */
 
+
+const fs = require('fs');
+const path = require('path');
+
 describe('Bulk Booking CSV', () => {
   it('test1', () => {
     cy.visit('https://demoaccount.asaanretail.pk/login');
     cy.wait(10000);
+
+    
+    
 
     cy.get('#email').should('be.visible').click();
     cy.get('#email').type('mubarak.waqar1998@gmail.com');
@@ -124,10 +131,21 @@ describe('Bulk Booking CSV', () => {
 
       const 
       
-      randomKey = generateRandomKey(5)
+      Externalorderno = generateRandomKey(5)
+
+      function generateordernumber(length) {
+        const charset = '0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+          result += charset.charAt(Math.floor(Math.random() * charset.length));
+        }
+        return result;
+      }
+
+      const 
 
 
-      OrderNo =  generateRandomKey(2)
+      OrderNo =  generateordernumber(2)
       
      
       function getRecentDate() {
@@ -147,10 +165,10 @@ describe('Bulk Booking CSV', () => {
 
 
 
-      const dataToAppend = [ OrderNo , 'AR_028 ','SKUHAIRCUT', '2','1000','200',
-                                'GST','GST','200', randomKey,recentDate,'barron','default','+923412106621','johndoe@example.com', 'BArron','+923412106621'
+      const dataToAppend = [ OrderNo , 'AR_028','SKUHAIRCUT', '2','1000','300',
+                                'GST','GST','200', Externalorderno,recentDate,'barron','default','+923412106621','johndoe@example.com', 'BArron','+923412106621'
                                 ,'Gulshan','Iqbal','Karachi','Pakistan','barron','+923412106621'
-                                ,'Gulshan','Iqbal','Karachi','Pakistan', '2500',]; 
+                                ,'Gulshan','Iqbal','Karachi','Pakistan', '2500','Muhammad amir','1', 'personal', 'Sub admin','Tall']; 
 
 
          // Append data to the CSV file
@@ -163,8 +181,29 @@ describe('Bulk Booking CSV', () => {
 
         cy.readFile(csvPath).then(content => {
         expect(content).to.include(dataToAppend.join(','));
+
+      /*  cy.get('input[type="file"]').attachFile({
+          filePath: `downloads/${latestFileName}`,
+          fileName: latestFileName
+        });
+
+
+
+
+                  // Submit the form or trigger the upload process
+                  cy.wait(4000);
+         cy.get("#OrderCSVFile").click()  
+         cy.wait(6000);       
+         cy.get('#orderCSVUploadFooter > div > button.btn.btn-success.ml-5').click();
+
+                  // Verify upload success (adjust based on your application logic)
+          cy.contains('Upload successful').should('be.visible');
+                    */
       });
     });
+
+
+
 
     });
     
@@ -175,4 +214,91 @@ describe('Bulk Booking CSV', () => {
 
 
   });
+
+
+  
+  describe('Move and Upload CSV File', () => {
+    it('Moves the downloaded file to fixtures and uploads it', () => {
+      const downloadsFolder = 'C:/Users/HP ELITEBOOK 840 G3/AppData/Local/Programs/Cypress automation/cypress/downloads';
+      const fixturesFolder = 'cypress/fixtures';
+  
+      // Visit and Perform Actions
+      cy.visit('https://demoaccount.asaanretail.pk/login');
+      cy.get('#email').type('mubarak.waqar1998@gmail.com');
+      cy.get('#password').type('mubi@12345');
+      cy.get('button[type="submit"]').click();
+      cy.url().should('contain', '/home');
+  
+      cy.visit('https://demoaccount.asaanretail.pk/order');
+
+      cy.get("span[class='nav-buttons-bar'] button[type='submit']").click({ force: true });
+      cy.wait(2000);
+      cy.get("a[onclick='import_third_party_orders(true);']").click({ force: true });
+      cy.wait(2000);
+      cy.get('#upload_CSV_modal_pill').click({ force: true });
+    /*  cy.get("button[onclick='downloadOrderTemplate()']").click(); */
+      cy.wait(10000); // Wait for the file to download
+  
+      // Move the file to fixtures
+      cy.task('getLatestDownloadedFile', downloadsFolder).then(latestFileName => {
+        const sourcePath = path.join(downloadsFolder, latestFileName);
+        const destinationPath = path.join(fixturesFolder, latestFileName);
+        cy.wait(2000);
+        // Move the file
+        cy.task('moveFile', { source: sourcePath, destination: destinationPath });
+        cy.wait(2000);
+        // Upload the file
+        cy.get('#OrderCSVFile') // Replace with the actual selector for the file input
+          .attachFile(latestFileName);
+          cy.wait(2000);
+
+          cy.get("#orderCSVUploadFooter").invoke('css', 'display', 'block');
+          cy.wait(6000);
+          cy.get("#orderCSVUploadFooter").click({ force: true }); // Trigger the modal or action
+          cy.wait(6000);
+          /*cy.get("#orderCSVUploadFooter > div > button.btn.btn-success.ml-5").click({ force: true });*/
+
+          /*cy.get("#orderCSVUploadFooter > div > button.btn.btn-success.ml-5").click({force: true});*/
+  
+          cy.get("div[id='product_category_modals'] div[id='orderImportModal'] button[class='btn btn-success ml-5'").click({force: true});
+
+
+         /*cy.get('#orderCSVUploadFooter > div > button.btn.btn-success.ml-5').click({force: true});  */ // Submit the upload form
+        cy.contains('Task Completed Successfully').should('be.visible');
+
+        cy.task('deleteAllFiles', 'C:/Users/HP ELITEBOOK 840 G3/AppData/Local/Programs/Cypress automation/cypress/fixtures');
+
+      });
+        
+
+
+
+
+
+    });
+  });
+  
+
+
 });
+
+function deleteAllFiles(folderPath) {
+  try {
+    const files = fs.readdirSync(folderPath);
+
+    files.forEach(file => {
+      const filePath = path.join(folderPath, file);
+      if (fs.statSync(filePath).isFile()) {
+        fs.unlinkSync(filePath); // Deletes the file
+      }
+    });
+
+    console.log(`All files deleted from folder: ${folderPath}`);
+  } catch (error) {
+    console.error(`Error deleting files: ${error.message}`);
+  }
+}
+
+// Example usage
+const folderPath = 'C:/Users/HP ELITEBOOK 840 G3/AppData/Local/Programs/Cypress automation/cypress/fixtures';
+deleteAllFiles(folderPath);
