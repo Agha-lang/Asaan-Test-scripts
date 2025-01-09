@@ -159,49 +159,34 @@ describe('Bulk Booking CSV', () => {
       console.log(recentDate); // Outputs: '2024-12-23' (or today's date)
             
      
-
-
-
-
-
-
-      const dataToAppend = [ OrderNo , 'AR_028','SKUHAIRCUT', '2','1000','300',
-                                'GST','GST','200', Externalorderno,recentDate,'barron','default','+923412106621','johndoe@example.com', 'BArron','+923412106621'
-                                ,'Gulshan','Iqbal','Karachi','Pakistan','barron','+923412106621'
-                                ,'Gulshan','Iqbal','Karachi','Pakistan', '2500','Muhammad amir','1', 'personal', 'Sub admin','Tall']; 
-
-
-         // Append data to the CSV file
-        cy.task('appendToCSV', { filePath: csvPath, data: dataToAppend }).then(result => {
-        if (result) {
-          throw new Error(`Failed to append data to CSV: ${result}`);
-      }
-
-
-
-        cy.readFile(csvPath).then(content => {
-        expect(content).to.include(dataToAppend.join(','));
-
-      /*  cy.get('input[type="file"]').attachFile({
-          filePath: `downloads/${latestFileName}`,
-          fileName: latestFileName
+      const rowsToAppend = [
+        [OrderNo, 'AR_028', 'SKUHAIRCUT', '2', '1000', '300', 'GST', 'GST', '200', Externalorderno, recentDate, 'barron', 'default', '+923412106621', 'johndoe@example.com', 'BArron', '+923412106621', 'Gulshan', 'Iqbal', 'Karachi', 'Pakistan', 'barron', '+923412106621', 'Gulshan', 'Iqbal', 'Karachi', 'Pakistan', '2500', 'Muhammad amir', '1', 'personal', 'Sub admin', 'Tall'],
+        [OrderNo, 'AR_029', 'SKUHAIRCUT2', '3', '1200', '400', 'GST', 'GST', '250', Externalorderno, recentDate, 'john', 'default', '+923412106622', 'janedoe@example.com', 'John', '+923412106622', 'Clifton', 'Block 2', 'Karachi', 'Pakistan', 'john', '+923412106622', 'Clifton', 'Block 2', 'Karachi', 'Pakistan', '2700', 'Ali Ahmed', '2', 'corporate', 'Admin', 'Short'],
+        // Add more rows as needed
+      ];
+      
+      // Append each row to the CSV
+      rowsToAppend.forEach(row => {
+        cy.task('appendToCSV', { filePath: csvPath, data: row }).then(result => {
+          if (result) {
+            throw new Error(`Failed to append data to CSV: ${result}`);
+          }
         });
-
-
-
-
-                  // Submit the form or trigger the upload process
-                  cy.wait(4000);
-         cy.get("#OrderCSVFile").click()  
-         cy.wait(6000);       
-         cy.get('#orderCSVUploadFooter > div > button.btn.btn-success.ml-5').click();
-
-                  // Verify upload success (adjust based on your application logic)
-          cy.contains('Upload successful').should('be.visible');
-                    */
       });
-    });
+      
+      // Verify the rows were added
+      rowsToAppend.forEach(row => {
+        cy.readFile(csvPath).then(content => {
+          expect(content).to.include(row.join(','));
+        });
+      });
+      
 
+
+
+
+
+    
 
 
 
@@ -261,6 +246,8 @@ describe('Bulk Booking CSV', () => {
           /*cy.get("#orderCSVUploadFooter > div > button.btn.btn-success.ml-5").click({force: true});*/
   
           cy.get("div[id='product_category_modals'] div[id='orderImportModal'] button[class='btn btn-success ml-5'").click({force: true});
+
+          cy.wait(500)
 
 
          /*cy.get('#orderCSVUploadFooter > div > button.btn.btn-success.ml-5').click({force: true});  */ // Submit the upload form
